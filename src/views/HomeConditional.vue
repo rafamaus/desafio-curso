@@ -1,15 +1,24 @@
 <template>
     <div>
+       
     <h1>Bem vindo, {{ user.email }}!</h1>
     <p>Você está na página de {{user.userRole }}</p>
     <button>dsmakd</button>
+      
+        
     </div>
+
 </template>
     
 
 <script>
+
 export default{
-    name: 'HomeAluno',
+    name: 'HomeConditional',
+    components: {
+        
+      
+    },
     data(){
         return{
 

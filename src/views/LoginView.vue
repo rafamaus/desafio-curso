@@ -8,6 +8,7 @@
             <p class="login-paragraph">Faça login para acessar sua página de cursos!</p>
 
             <form @submit="loginSubmit" ref="loginForm">
+                {{ email }}
                 <BaseInput id="email" label="E-mail" type="email" placeholder="seu@email.com" v-model="email" />
                 <BaseInput id="password" label="Senha" type="password" placeholder="Senha" v-model="password" pattern="^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$"/>
                 <RadioInput v-model="userRole" />
@@ -35,6 +36,7 @@ export default {
     components: {
         BaseInput,
         RadioInput,
+        
     },
     methods: {
         loginSubmit() {
@@ -109,7 +111,7 @@ export default {
     font-style: normal;
 }
 .login-paragraph{
-    box-shadow: 0 2px  20px 5px rgba(255, 3, 24, 0.644);
+    
     border-color: violet;
     border-style: solid;
     border-width: 1px;
@@ -123,7 +125,7 @@ export default {
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
-    text-shadow: 0 0 3px rgb(151, 4, 78);
+
 }
 .login-button-submit{
     margin-top: 20px;

@@ -10,6 +10,7 @@ export default new Vuex.Store({
         email:'',
         password:'',
         userRole:'',
+        cursoPesquisado: '',
     },
     mutations:{
         setEmail(state, email){
@@ -20,6 +21,9 @@ export default new Vuex.Store({
         },
         setUserRole(state, userRole){
             state.userRole = userRole
+        },
+        setCursoPesquisado(state, cursoPesquisado){
+            state.cursoPesquisado = cursoPesquisado
         }
     },
     actions:{
@@ -27,6 +31,9 @@ export default new Vuex.Store({
             commit('setEmail', email)
             commit('setPassword', password)
             commit('setUserRole', userRole)
+        },
+        searchCurso({commit}, {cursoPesquisado}){
+            commit('setCursoPesquisado', cursoPesquisado)
         }
     },
     getters :{
@@ -36,6 +43,17 @@ export default new Vuex.Store({
                 password: state.password,
                 userRole: state.userRole
             }
+        },
+        getCursoPesquisado(state){
+            return{
+                cursoPesquisado: state.cursoPesquisado
+            }
+        },
+        isAluno(state){
+            return state.userRole === 'aluno'
+        },
+        isProfessor(state){
+            return state.userRole === 'professor'
         }
     }
 

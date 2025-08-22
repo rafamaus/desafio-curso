@@ -26,10 +26,9 @@ export default {
                 event.target.setCustomValidity('Este campo precisa ser preenchido!')
             }
             else if (this.type === 'password') {
-                console.log('passworderrada ')
                     event.target.setCustomValidity('A senha precisa de pelo menos 8 letras, sendo pelo menos uma delas um símbolo especial e um número')
                 }
-                else if (this.type === 'email') {
+            else if (this.type === 'email') {
                     event.target.setCustomValidity('Por favor, insira um e-mail válido!')
                 }
             }
@@ -60,6 +59,7 @@ export default {
     font-family: "Black Ops One", system-ui;
     font-weight: 400;
     font-style: normal;
+    box-shadow: 5px 5px 10px rgba(194, 61, 61, 0.3);
 }
 
 .label-only {
