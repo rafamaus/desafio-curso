@@ -7,11 +7,11 @@
             <h1 class="login-title">Novos Talentos</h1>
             <p class="login-paragraph">Faça login para acessar sua página de cursos!</p>
 
-            <form @submit="loginSubmit">
+            <form @submit="loginSubmit" ref="loginForm">
                 <BaseInput id="email" label="E-mail" type="email" placeholder="seu@email.com" v-model="email" />
-                <BaseInput id="password" label="Senha" type="password" placeholder="Senha" v-model="password" />
+                <BaseInput id="password" label="Senha" type="password" placeholder="Senha" v-model="password" pattern="^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$"/>
                 <RadioInput v-model="userRole" />
-                <button type="submit">Entrar</button>
+                <button type="submit" class="login-button-submit">Entrar</button>
             </form>
         </div>
     </div>
@@ -38,12 +38,23 @@ export default {
     },
     methods: {
         loginSubmit() {
+            const form = this.$refs.loginForm
+            if(!form.checkValidity()){
+                form.reportValidity()
+                return
+            }
             if (!this.userRole) {
                 alert('Selecione o tipo de usuário.')
                 return
             }
-            if (this.userRole === 'aluno') this.$router.push('/homeAluno')
-            else this.$router.push('/homeProfessor')
+                this.$router.push('/homeAluno')
+            
+            this.$store.dispatch('saveLoginData',{
+                email: this.email,
+                password: this.password,
+                userRole: this.userRole
+            })
+            
         }
     }
 }
@@ -51,11 +62,16 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=M+PLUS+Rounded+1c&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo+Black&family=Bagel+Fat+One&family=Federant&display=swap');
+*{
+      font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 .login-container {
     position: fixed;
     inset: 0;
-    background-color: rgb(214, 235, 241);
+    background-color: rgb(237, 220, 233);
     width: 100%;
     height: 100%;
 
@@ -93,11 +109,38 @@ export default {
     font-style: normal;
 }
 .login-paragraph{
-    box-shadow: inset 0 0 10px violet;
+    box-shadow: 0 2px  20px 5px rgba(255, 3, 24, 0.644);
+    border-color: violet;
+    border-style: solid;
+    border-width: 1px;
     display: flex;
     justify-content: center;
     margin: auto;
     padding: 4px;
     border-radius: 4px;
+    margin-bottom: 20px;
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    text-shadow: 0 0 3px rgb(151, 4, 78);
+}
+.login-button-submit{
+    margin-top: 20px;
+    padding: 8px;
+    padding-left: 32px;
+    padding-right: 32px;
+    background-color:rgb(151, 4, 78) ;
+    border-style: groove;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border-color: violet;
+    box-shadow: inset 0 0 10px violet;
+}
+.login-button-submit:hover{
+    background-color:rgb(185, 50, 117);
+    transform: scale(1.1);
+    
 }
 </style>

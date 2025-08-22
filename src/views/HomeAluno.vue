@@ -1,6 +1,7 @@
 <template>
     <div>
-    <h1>aluno</h1>
+    <h1>Bem vindo, {{ user.email }}!</h1>
+    <p>Você está na página de {{user.userRole }}</p>
     <button>dsmakd</button>
     </div>
 </template>
@@ -13,6 +14,12 @@ export default{
         return{
 
         }
+    },
+    computed:{
+        user(){
+            return this.$store.getters.getUserData
+        }
+
     }
 }
 </script>

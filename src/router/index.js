@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import LoginView from '@/views/LoginView.vue'
 import HomeAluno from '@/views/HomeAluno.vue'
-import HomeProfessor from  '@/views/HomeProfessor.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -11,6 +11,6 @@ export default new Router({
     routes: [
         {path: '/', component: LoginView},
         {path: '/homeAluno', component: HomeAluno},
-        {path: '/homeProfessor', component: HomeProfessor},
+        
     ]
 })

@@ -2,7 +2,7 @@
     <div class="input-group">
         <label :for="id" class="label-only">{{ label }}</label>
         <input class="input-only" :id="id" :type="type" :placeholder="placeholder" :value="value"
-            @input="handleInput" @invalid="handleInvalid" required>
+            @input="handleInput" @invalid="handleInvalid" required :pattern="pattern">
     </div>
 </template>
 <script>
@@ -13,7 +13,8 @@ export default {
         label: String,
         type: String,
         placeholder: String,
-        value: String
+        value: String,
+        pattern: String,
     },
     methods: {
         handleInput(event){
@@ -24,16 +25,15 @@ export default {
             if (!event.target.value) {
                 event.target.setCustomValidity('Este campo precisa ser preenchido!')
             }
-            else {
-                if (this.type === 'password') {
-                    event.target.setCustomValidity('A senha precisa de pelo menos 8 letras, sendo uma delas um símbolo especial e um número')
+            else if (this.type === 'password') {
+                console.log('passworderrada ')
+                    event.target.setCustomValidity('A senha precisa de pelo menos 8 letras, sendo pelo menos uma delas um símbolo especial e um número')
                 }
-                else if (this.type === 'senha') {
+                else if (this.type === 'email') {
                     event.target.setCustomValidity('Por favor, insira um e-mail válido!')
                 }
             }
         }
-    }
 }
 
 </script>
@@ -57,6 +57,9 @@ export default {
     justify-content: center;
     margin: auto;
     background-color: rgb(255, 255, 255);
+    font-family: "Black Ops One", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .label-only {
