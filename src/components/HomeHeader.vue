@@ -1,7 +1,8 @@
 <template>
     <header class="header-home">
         <div class="div-header-home">
-            <button @click="abrirSideBar" class="btn-sideBar">|||</button>
+            <button @click="toggleSideBar" class="btn-sideBar">|||</button>
+            <SideBar v-if="mostrarSideBar"/>
             <img src="@/assets/generic.png" alt="Logo site de Cursos Implydemy">
 
             <div v-if="isAluno" class="search-area">
@@ -20,11 +21,17 @@
 
 </template>
 <script>
+import SideBar from './SideBar.vue'
+
+
 export default {
     name: 'HomeHeader',
+    components:{ SideBar,
+    },
     data() {
         return {
-            cursoPesquisado: ''
+            cursoPesquisado: '',
+            mostrarSideBar: false
         }
     },
     computed: {
@@ -50,7 +57,15 @@ export default {
         },
         abrirSideBar() {
             return
+        },
+          toggleSidebar() {
+            this.mostrarSideBar = !this.mostrarSideBar
+            console.log("Sidebar:", this.mostrarSideBar)
+        },
+        criarCurso(){
+            console.log('criou')
         }
+
 
     }
 

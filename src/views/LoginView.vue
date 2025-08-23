@@ -9,7 +9,7 @@
 
             <form @submit="loginSubmit" ref="loginForm">
                 
-                <BaseInput id="email" label="E-mail" type="email" placeholder="seu@email.com" v-model="email" /><!--^tem q começar com :-->
+                <BaseInput id="email" label="E-mail" type="email" placeholder="seu@email.com" v-model="email" />
                 <BaseInput id="password" label="Senha" type="password" placeholder="Senha" v-model="password" pattern="^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$"/>
                 <RadioInput v-model="userRole" />
                 <button type="submit" class="login-button-submit">Entrar</button>

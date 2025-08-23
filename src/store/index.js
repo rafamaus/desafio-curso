@@ -11,6 +11,8 @@ export default new Vuex.Store({
         password:'',
         userRole:'',
         cursoPesquisado: '',
+        categorias: ['marketing','design','fotografia','idiomas','arte'],
+        cursos: ['java','php']
     },
     mutations:{
         setEmail(state, email){
@@ -24,6 +26,9 @@ export default new Vuex.Store({
         },
         setCursoPesquisado(state, cursoPesquisado){
             state.cursoPesquisado = cursoPesquisado
+        },
+        setListaDeCursos(state, cursos){
+            state.cursos = cursos
         }
     },
     actions:{
@@ -34,6 +39,9 @@ export default new Vuex.Store({
         },
         searchCurso({commit}, {cursoPesquisado}){
             commit('setCursoPesquisado', cursoPesquisado)
+        },
+        saveCursos({commit},{cursos}){
+            commit('setListaDeCursos',cursos)
         }
     },
     getters :{
@@ -54,11 +62,17 @@ export default new Vuex.Store({
         },
         isProfessor(state){
             return state.userRole === 'professor'
+        },
+        getCategorias(state){
+            return state.categorias
+        },
+        getCursos(state){
+            return state.cursos
         }
-    }
 
 
 
 
 
-})
+
+}})
