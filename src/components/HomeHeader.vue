@@ -1,23 +1,25 @@
 <template>
-    <header class="header-home">
-        <div class="div-header-home">
-            <button @click="toggleSideBar" class="btn-sideBar">|||</button>
-            <SideBar v-if="mostrarSideBar"/>
-            <img src="@/assets/generic.png" alt="Logo site de Cursos Implydemy">
+    <div class="headerAndSideBar">
+        <header class="header-home">
+            <div class="div-header-home">
+                <button @click="toggleSideBar" class="btn-sideBar">|||</button>
+                <img src="@/assets/generic.png" alt="Logo site de Cursos Implydemy">
 
-            <div v-if="isAluno" class="search-area">
-                <input v-model="cursoPesquisado" type="text" placeholder="Pesquisar cursos" class="input-pesquisa">
-                <button @click="pesquisarCurso">🔍</button>
+                <div v-if="isAluno" class="search-area">
+                    <input v-model="cursoPesquisado" type="text" placeholder="Pesquisar cursos" class="input-pesquisa">
+                    <button @click="pesquisarCurso">🔍</button>
+                </div>
+
+                <button v-if="isProfessor" @click="criarCurso">Criar curso</button>
+
+                <nav class="navClass">
+                    <button @click="direcionaPerfil">Perfil</button>
+                    <button @click="direcionaCursos">Cursos</button>
+                </nav>
             </div>
-
-            <button v-if="isProfessor" @click="criarCurso">Criar curso</button>
-
-            <nav class="navClass">
-                <button @click="direcionaPerfil">Perfil</button>
-                <button @click="direcionaCursos">Cursos</button>
-            </nav>
-        </div>
-    </header>
+        </header>
+        <SideBar v-if="getStateSideBar"/>
+    </div>
 
 </template>
 <script>
@@ -31,7 +33,7 @@ export default {
     data() {
         return {
             cursoPesquisado: '',
-            mostrarSideBar: false
+            
         }
     },
     computed: {
@@ -40,6 +42,9 @@ export default {
         },
         isProfessor() {
             return this.$store.getters.isProfessor
+        },
+        getStateSideBar(){
+            return this.$store.getters.getStateSideBar
         }
 
     },
@@ -55,15 +60,13 @@ export default {
                 cursoPesquisado: this.cursoPesquisado
             })
         },
-        abrirSideBar() {
-            return
-        },
-          toggleSidebar() {
-            this.mostrarSideBar = !this.mostrarSideBar
+        toggleSideBar() {
+            const atual = this.getStateSideBar
+            this.$store.dispatch("showSideBar", {mostrarSideBar : !atual})
             console.log("Sidebar:", this.mostrarSideBar)
         },
         criarCurso(){
-            console.log('criou')
+            this.$router.push('/cadastro-curso')
         }
 
 
@@ -74,6 +77,9 @@ export default {
 
 </script>
 <style>
+.headerAndSideBar{
+    margin-bottom: 40px;
+}
 .header-home{
     position: fixed;
     margin: 0;
@@ -82,6 +88,7 @@ export default {
     right: 0;
     left: 0;
     background-color: rgb(168, 8, 8);
+    z-index: 999;
 
 }
 .div-header-home{

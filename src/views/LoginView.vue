@@ -49,7 +49,8 @@ export default {
                 alert('Selecione o tipo de usuário.')
                 return
             }
-                this.$router.push('/homeAluno')
+            alert('Login concluído com sucesso!!')
+            this.$router.push('/homeAluno')
             
             this.$store.dispatch('saveLoginData',{
                 email: this.email,

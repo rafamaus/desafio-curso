@@ -1,11 +1,12 @@
 <template>
-    <footer class="footer-home">
-        <div class="div-footer-home">
-            <img src="@/assets/generic.png" alt="Logo Implydemy">
-            <p>© 2025 Sua Plataforma – todos os direitos reservados</p>
-        </div>
-    </footer>
-
+    <div class="footer">
+        <footer class="footer-home">
+            <div class="div-footer-home">
+                <img src="@/assets/generic.png" alt="Logo Implydemy">
+                <p>© 2025 Sua Plataforma – todos os direitos reservados</p>
+            </div>
+        </footer>
+    </div>
 </template>
 <script>
 export default{
@@ -14,7 +15,11 @@ export default{
 }
 </script>
 <style>
+.footer{
+    margin-top: 40px;
+}
 .footer-home{
+    
     background-color: rgb(168, 8, 8);
     margin: 0;
     padding: 0;

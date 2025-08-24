@@ -1,17 +1,23 @@
 <template>
-    <div v-if="isAluno" class="side-bar">
-        <div class="isAluno">
-            <progress value="40" max="100"></progress>
-            <ul>
-                <li v-for="(categoria,index) in categorias" :key="index"><button>{{categoria }}</button></li>
-            </ul>
+    <div class="div-side-bar">
+        <button @click="closeSideBar" class="fecha-side-bar">X</button>
+        <div v-if="isAluno" class="side-bar">
+            <div class="isAluno">
+                <progress value="40" max="100"></progress>
+                <ul>
+                    <li v-for="(categoria,index) in categorias" :key="index"><button>{{categoria }}</button></li>
+                </ul>
+            </div>
         </div>
-        <div v-if="isProfessor" class="isProfessor">
-            <p>Número de cursos possuídos: {{numCursos }}</p>
-            <ul>
-                <li v-for="(curso,index) in cursos" :key="index">{{ curso }} - Número de inscritos: {{ curso }}</li>
-            </ul>
-        </div>
+        
+            <div v-if="isProfessor" class="side-bar">
+                <div class="isProfessor">
+                <p>Número de cursos possuídos: {{numCursos }}</p>
+                <ul>
+                    <li v-for="(curso,index) in cursos" :key="index">{{ curso }} - Número de inscritos: {{ curso }}</li>
+                </ul>
+                </div>
+            </div>
     </div>
 </template>
 <script>
@@ -29,17 +35,27 @@ export default{
         },
         cursos(){
             return this.$store.getters.getCursos
+        },
+        getStateSideBar(){
+            return this.$store.getters.getStateSideBar
         }
+    },
+    methods:{
+        closeSideBar(){
+            this.$store.dispatch('showSideBar', {mostrarSideBar:false})
+        }
+
     }
 }
 </script>
 <style>
-.side-bar {
+.div-side-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 250px;
   height: 100%;
+  background-color: blue    ;
   background: #333;
   color: white;
   padding: 20px;

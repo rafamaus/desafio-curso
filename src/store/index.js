@@ -11,8 +11,22 @@ export default new Vuex.Store({
         password:'',
         userRole:'',
         cursoPesquisado: '',
-        categorias: ['marketing','design','fotografia','idiomas','arte'],
-        cursos: ['java','php']
+        categorias: ['futebol','marketing','design','fotografia','idiomas','arte'],
+        aulas:[{
+            assunto: "Introdução ao Vue",
+            conteudo: "Vue é um framework progressivo...",
+            video: File,
+            duracao: 45
+        },
+            {
+            assunto: "Introdução ao Vue3",
+            conteudo: "Vue é um framework progressivo...",
+            video: File,
+            duracao: 45
+            }    
+    ],
+        cursos: [],
+        mostrarSideBar : false
     },
     mutations:{
         setEmail(state, email){
@@ -29,6 +43,15 @@ export default new Vuex.Store({
         },
         setListaDeCursos(state, cursos){
             state.cursos = cursos
+        },
+        setDisplaySideBar(state, mostrarSideBar){
+            state.mostrarSideBar = mostrarSideBar
+        },
+        setAulas(state, aula){
+            state.aulas.push(aula)
+        },
+        addCurso(state,curso){
+            state.cursos.push(curso)
         }
     },
     actions:{
@@ -40,8 +63,14 @@ export default new Vuex.Store({
         searchCurso({commit}, {cursoPesquisado}){
             commit('setCursoPesquisado', cursoPesquisado)
         },
-        saveCursos({commit},{cursos}){
-            commit('setListaDeCursos',cursos)
+        saveCurso({commit},curso){
+            commit('addCurso',curso)
+        },
+        showSideBar({commit}, {mostrarSideBar}){
+            commit('setDisplaySideBar', mostrarSideBar)
+        },
+        saveAula({commit}, aula){
+            commit('setAulas', aula)
         }
     },
     getters :{
@@ -68,11 +97,12 @@ export default new Vuex.Store({
         },
         getCursos(state){
             return state.cursos
+        },
+        getStateSideBar(state){
+            return state.mostrarSideBar
+        },
+        getAulas(state){
+            return state.aulas
         }
-
-
-
-
-
 
 }})

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HomeHeader/>
+    <HomeHeader v-if="this.$route.path!='/'"/>
     <div class="router-view">
     <router-view/>
     </div>
