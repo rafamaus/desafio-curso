@@ -91,7 +91,9 @@ export default{
             periodo:{
                 dataInicio:'',
                 dataTermino:'',
-            }
+            },
+            alunosInscritos:[],
+            slug:''
         }
     },
     components: {
@@ -102,7 +104,7 @@ export default{
         
     },
     methods:{
-         adicionarAula(aula) {
+        adicionarAula(aula) {
             const jaExiste = this.aulas.aulasSelecionadas.some(a => a.assunto === aula.assunto);
             if (!jaExiste) {
             this.aulas.aulasSelecionadas.push(aula);
@@ -120,13 +122,15 @@ export default{
             this.etapa = this.etapa+1
         },
         criarCurso(){
-            
+            this.slug = this.infoBasica.nomeCurso.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim()
 
             const cursoCompleto={
-                teste:'dadada',
+                
                 infoBasica: this.infoBasica,
                 aulas:this.aulas,
-                periodo:this.periodo
+                periodo:this.periodo,
+                alunosInscritos:this.alunosInscritos,
+                slug: this.slug
             }
 
             this.$store.dispatch('saveCurso', cursoCompleto)

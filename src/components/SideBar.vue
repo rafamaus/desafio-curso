@@ -11,10 +11,10 @@
         </div>
         
             <div v-if="isProfessor" class="side-bar">
-                <div class="isProfessor">
-                <p>Número de cursos possuídos: {{numCursos }}</p>
+                <div class="isProfessor"> 
+                <p>Número de cursos possuídos: {{getCursos.length}}</p>
                 <ul>
-                    <li v-for="(curso,index) in cursos" :key="index">{{ curso }} - Número de inscritos: {{ curso }}</li>
+                    <li v-for="(curso,index) in getCursos" :key="index">{{ curso.infoBasica.nomeCurso }} - Número de inscritos: X</li>
                 </ul>
                 </div>
             </div>
@@ -38,6 +38,9 @@ export default{
         },
         getStateSideBar(){
             return this.$store.getters.getStateSideBar
+        },
+        getCursos(){
+            return this.$store.getters.getCursos
         }
     },
     methods:{

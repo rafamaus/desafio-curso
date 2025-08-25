@@ -7,6 +7,7 @@ import PerfilPage from '@/views/PerfilPage.vue'
 import CursosPage from '@/views/CursosPage.vue'
 import CadastroCurso from '@/views/CadastrarCurso/CadastroCurso.vue'
 import NovaAula from '@/views/CriarAula/NovaAula.vue'
+import CursoDetalhe from '@/views/CursoDetalhe.vue'
 
 import store from '@/store'
 
@@ -20,7 +21,8 @@ const router = new Router({
         {path: '/perfilPage', component: PerfilPage},
         {path: '/cursosPage', component: CursosPage},
         {path: '/cadastro-curso', component: CadastroCurso},
-        {path: '/nova-aula', component: NovaAula}
+        {path: '/nova-aula', component: NovaAula},
+        {path: '/curso/:slug', component: CursoDetalhe}
     ]
 })
 router.beforeEach((to, from, next) => {

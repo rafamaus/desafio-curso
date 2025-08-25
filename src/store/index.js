@@ -26,7 +26,8 @@ export default new Vuex.Store({
             }    
     ],
         cursos: [],
-        mostrarSideBar : false
+        mostrarSideBar : false,
+        slugAberta:''
     },
     mutations:{
         setEmail(state, email){
@@ -52,6 +53,9 @@ export default new Vuex.Store({
         },
         addCurso(state,curso){
             state.cursos.push(curso)
+        },
+        setSlugAberta(state,slugAberta){
+            state.slugAberta=slugAberta
         }
     },
     actions:{
@@ -71,6 +75,9 @@ export default new Vuex.Store({
         },
         saveAula({commit}, aula){
             commit('setAulas', aula)
+        },
+        saveSlugAberta({commit}, slugAberta){
+            commit('setSlugAberta', slugAberta)
         }
     },
     getters :{
@@ -103,6 +110,9 @@ export default new Vuex.Store({
         },
         getAulas(state){
             return state.aulas
+        },
+        getSlugAberta(state){
+            return state.slugAberta
         }
 
 }})

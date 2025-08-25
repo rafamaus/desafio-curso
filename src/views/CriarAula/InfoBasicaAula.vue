@@ -3,8 +3,8 @@
         
     <h2>Informações Básicas</h2>
     <p>Defina o assunto e conteúdo da sua aula</p>
-    <BaseInput id="assuntoAula" label="Assunto da Aula *" type="text" placeholder="Ex: Introdução ao React" v-model="assuntoAula" aria-disabled="false"/>
-    <DescricaoInput id="descricaoAula" label="Descrição da Aula"/>
+    <BaseInput :value="assuntoAula" @input="updateAssuntoAula" id="assuntoAula" label="Assunto da Aula *" type="text" placeholder="Ex: Introdução ao React"  aria-disabled="false"/>
+    <DescricaoInput :value="descricaoAula" @input="updateDescricaoAula" id="descricaoAula" label="Descrição da Aula"/>
     </div>
 </template>
 <script>
@@ -16,6 +16,18 @@ export default{
     components:{
         BaseInput,
         DescricaoInput
+    },
+    props:{
+        assuntoAula:String,
+        descricaoAula:String
+    },
+    methods:{
+        updateAssuntoAula(value){
+            this.$emit('update:assuntoAula', value)
+        },
+        updateDescricaoAula(value){
+            this.$emit('update:descricaoAula',value)
+        }
     }
 }</script>
 <style></style>
