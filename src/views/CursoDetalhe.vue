@@ -3,18 +3,18 @@
         <div class="exibe-aulas">
             <h2>Aulas do Curso</h2>
             <p>Clique em uma aula para visualizar o conteúdo</p>
-            <div class="div-sub-container">
+            <div class="div-sub-container" v-if="curso">
                 <div class="div-for-aulas">
-                    <div v-for="(curso,index) in getCursos" :key="index" class="input-group">
-                        <button class="input-aula" v-for="(aula,i) in curso.aulas.aulasSelecionadas" :key="i" @click="videoAulaTela(aula.assunto)">
-                            <h4>*{{aula.assunto}}</h4>
-                            <p>{{aula.duracao}} minutos</p>
+                    <div class="input-group">
+                        <button class="input-aula" v-for="(aula,i) in curso.aulas.aulasSelecionadas" :key="i" @click="videoAulaTela(aula.assuntoAula)">
+                            <h4>*{{aula.assuntoAula}}</h4>
+                            <p>{{aula.duracaoAula}} minutos</p>
                         </button>
                     </div>
                 </div>
                 <div class="div-for-video">
                     <h4>{{ tituloAula }}</h4>
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/qjwjMA2SIFs?si=EjSUU4ZVrWIaLS_I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe width="100%" height="315" :src="videoNaTela" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     <button @click="concluirAula">Marcar como concluída</button>
                 </div>
             </div>
@@ -33,7 +33,8 @@
         name:'CursoDetalhe',
         data(){
             return{
-                tituloAula:''
+                tituloAula: '',
+                videoNaTela:''
             }
         },
         computed:{
@@ -45,7 +46,11 @@
             },
             getAulas(){
             return this.$store.getters.getAulas
-        }
+            },
+            curso(){
+                return this.getCursos.find(curso=> curso.slug === this.getSlugAberta)
+            }
+        
         },
         methods:{
             descobreCurso(){
@@ -58,14 +63,26 @@
             },
             videoAulaTela(tituloAula){
                 this.tituloAula = tituloAula
+                
+                const aula = this.curso.aulas.aulasSelecionadas.find(
+                    aula=> aula.assuntoAula===tituloAula)   
+                    
+                if(aula) this.videoNaTela =aula.videoAula
             },
             concluirAula(){
-                return 0
+                this.$store.dispatch("marcaAulaConcluida",{
+                    cursoSlug : this.getSlugAberta,
+                    assuntoAula: this.tituloAula
+                })
+                alert('aula concluída')
             }
-        }
+
+    },
+    mounted(){
+        this.tituloAula= this.curso.aulas.aulasSelecionadas[0].assuntoAula
+        this.videoNaTela= this.curso.aulas.aulasSelecionadas[0].videoAula
     }
-
-
+}
 </script>
 <style>
 .input-aula{
@@ -84,6 +101,8 @@
     box-shadow: 5px 5px 10px rgba(194, 61, 61, 0.3);
     display: flex;
     justify-content: start;
+    align-items: center;
+    gap:20px;
 }
 .div-sub-container{
     display: flex;

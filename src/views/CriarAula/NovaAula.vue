@@ -4,11 +4,14 @@
         <p>Preencha as informações da sua aula em 2 etapas simples</p>
         <div v-if="etapa===0" class="etapa-zero-container">
             <InfoBasicaAula
-                :assuntoAula="infoBasicaAula.assuntoAula"
-                @update:assuntoAula="infoBasicaAula.assuntoAula=$event"
+                :assuntoAula="assuntoAula"
+                @update:assuntoAula="assuntoAula=$event"
 
-                :descricaoAula="infoBasicaAula.descricaoAula"
-                @update:descricaoAula="infoBasicaAula.descricaoAula=$event"
+                :descricaoAula="descricaoAula"
+                @update:descricaoAula="descricaoAula=$event"
+
+                :duracaoAula="duracaoAula"
+                @update:duracaoAula="duracaoAula=$event"
             />
             <div class="div-antes-depois">
                 <button class="btn-antes-depois" @click="voltaEtapa" style="background-color: gray;">Voltar</button>
@@ -41,11 +44,11 @@ export default{
     data(){
         return{
             etapa:0,
-            infoBasicaAula:{
-                assuntoAula:'',
-                descricaoAula:''
-            },
-            videoAula: {}
+            assuntoAula:'',
+            descricaoAula:'',
+            duracaoAula: '',
+            videoAula: '',
+            concluida: 'Não'
         }
     },
     components:{
@@ -62,8 +65,11 @@ export default{
         },
         criarAula(){
             const aulaCompleta={
-                infoBasicaAula:this.infoBasicaAula,
-                videoAula:this.videoAula
+                assuntoAula:this.assuntoAula,
+                descricaoAula:this.descricaoAula,
+                duracaoAula:this.duracaoAula,
+                videoAula:this.videoAula,
+                concluida:this.concluida
             }
             this.$store.dispatch('saveAula', aulaCompleta)
             alert('aula criada com sucesso ')

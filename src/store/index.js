@@ -13,16 +13,18 @@ export default new Vuex.Store({
         cursoPesquisado: '',
         categorias: ['futebol','marketing','design','fotografia','idiomas','arte'],
         aulas:[{
-            assunto: "Introdução ao Vue",
-            conteudo: "Vue é um framework progressivo...",
-            video: File,
-            duracao: 45
+            assuntoAula: "Introdução ao Vue",
+            descricaoAula: "Vue é um framework progressivo...",
+            duracaoAula: 45,
+            videoAula: "https://www.youtube.com/embed/qjwjMA2SIFs?si=EjSUU4ZVrWIaLS_I",
+            concluida: "Não"
         },
             {
-            assunto: "Introdução ao Vue3",
-            conteudo: "Vue é um framework progressivo...",
-            video: File,
-            duracao: 45
+            assuntoAula: "Introdução ao Vue",
+            descricaoAula: "Vue é um framework progressivo...",
+            duracaoAula: 45,
+            videoAula: 'https://www.youtube.com/embed/qjwjMA2SIFs?si=EjSUU4ZVrWIaLS_I',
+            concluida: 'Não'
             }    
     ],
         cursos: [],
@@ -56,6 +58,15 @@ export default new Vuex.Store({
         },
         setSlugAberta(state,slugAberta){
             state.slugAberta=slugAberta
+        },
+        markAulaConcluida(state, {cursoSlug, assuntoAula}){
+            const curso = state.cursos.find(c =>c.slug === cursoSlug)
+            if(curso){
+                const aula = curso.aulas.aulasSelecionadas.find(a=> a.assuntoAula===assuntoAula)
+                if(aula){
+                    aula.concluida = "Sim"
+                }
+            }
         }
     },
     actions:{
@@ -78,6 +89,9 @@ export default new Vuex.Store({
         },
         saveSlugAberta({commit}, slugAberta){
             commit('setSlugAberta', slugAberta)
+        },
+        marcaAulaConcluida({commit}, info){
+            commit('markAulaConcluida', info)
         }
     },
     getters :{

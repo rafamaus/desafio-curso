@@ -21,7 +21,7 @@ export default{
         }
     },
     props:{
-        videoAula:Object
+        videoAula:String
     },
     methods:{
         updateVideoInfo(value){

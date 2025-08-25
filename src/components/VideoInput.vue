@@ -23,19 +23,13 @@ export default{
                 return
             }
             const videoURL = URL.createObjectURL(files);
-            const video = document.createElement('video');
-            video.preload = 'metadata';
-            video.src = videoURL;
                 
-            video.onloadedmetadata = () => {
-                const duracao = video.duration;
-                URL.revokeObjectURL(videoURL);
-                this.$emit('change', {
-                    url: videoURL,
-                    duracao
-                })
+            
+            this.$emit('change',videoURL)
+            
                 
-            }
+                
+
             
         }
     },

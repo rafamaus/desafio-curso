@@ -21,8 +21,6 @@
 
                 :descricaoCurso="infoBasica.descricaoCurso"
                 @update:descricaoCurso="infoBasica.descricaoCurso = $event"
-
-                
             
             />
 
@@ -40,8 +38,7 @@
             
             <VinculoAulas ref="vinculoAulasRef"
                 :aulasSelecionadas="aulas.aulasSelecionadas"
-                @add:aula="adicionarAula"
-                @remove:aula="removerAula"
+                @update:aulasSelecionadas="aulas.aulasSelecionadas = $event" 
             />
             <div class="div-antes-depois">
                 <button class="btn-antes-depois" @click="voltaEtapa" style="background-color: red;">Voltar</button>
@@ -93,7 +90,8 @@ export default{
                 dataTermino:'',
             },
             alunosInscritos:[],
-            slug:''
+            slug:'',
+            slugCategoria:''
         }
     },
     components: {
@@ -123,6 +121,7 @@ export default{
         },
         criarCurso(){
             this.slug = this.infoBasica.nomeCurso.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim()
+            this.slugCategoria = this.infoBasica.categoriaCurso.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim()
 
             const cursoCompleto={
                 
@@ -130,7 +129,8 @@ export default{
                 aulas:this.aulas,
                 periodo:this.periodo,
                 alunosInscritos:this.alunosInscritos,
-                slug: this.slug
+                slug: this.slug,
+                slugCategoria:this.slugCategoria
             }
 
             this.$store.dispatch('saveCurso', cursoCompleto)

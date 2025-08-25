@@ -2,8 +2,9 @@
     <div class="container-home-global">    
         <h1>Bem vindo, {{ user.userRole }}!</h1>
         <div v-if="isProfessor" class="container-welcome">
-            <h2>Como começar?</h2>
-            <p>Aqui você pode criar, gerenciar e acompanhar seus cursos. Para começar, clique no botão abaixo e cadastre seu primeiro curso.</p>
+            <h2>Como começar?</h2> 
+            <p v-if="getCursos.length===0">Você ainda não cadastrou nenhum curso, comece agora!!</p>
+            <p v-else>Aqui você pode criar, gerenciar e acompanhar seus cursos. </p>
             <div class="botoes-professor">
                 <button>+ Crie Cursos</button>
                 <button>* Gerencie Alunos</button>
@@ -13,7 +14,8 @@
         </div>
         <div v-if="isAluno" class="container-welcome">
             <h2>Explore nossos cursos!</h2>
-            <p>Descubra uma variedade de cursos criados por nossos professores especializados. Navegue pelas categorias e encontre o curso perfeito para você.</p>
+            <p v-if="getCursos.length===0">Você ainda não possui cursos disponíveis para se inscrver</p>
+            <p v-else>Descubra uma variedade de cursos criados por nossos professores especializados. Navegue pelas categorias e encontre o curso perfeito para você.</p>
             <div class="botoes-professor">
                 <button>Tecnologia</button>
                 <button>Negócios</button>
@@ -55,6 +57,9 @@ export default{
         },
         user(){
             return this.$store.getters.getUserData
+        },
+        getCursos(){
+            return this.$store.getters.getCursos
         }
 
     }

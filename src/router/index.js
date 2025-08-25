@@ -21,16 +21,21 @@ const router = new Router({
         {path: '/perfilPage', component: PerfilPage},
         {path: '/cursosPage', component: CursosPage},
         {path: '/cadastro-curso', component: CadastroCurso},
+        {path: '/cursosPage/:slug', component: CursosPage},
         {path: '/nova-aula', component: NovaAula},
         {path: '/curso/:slug', component: CursoDetalhe}
     ]
 })
 router.beforeEach((to, from, next) => {
     const userAthenticated = !!store.state.email && !!store.state.password && !!store.state.userRole
+    const rotasProibidasAluno =['/cadastro-curso', '/nova-aula']
 
     if (to.path !== '/' && !userAthenticated) {
         next('/')
-    } else {
+    } else if(store.state.userRole==='aluno' && rotasProibidasAluno.includes(to.path)) {
+        next('/homeAluno')
+    }
+    else{
         next()
     }
 })

@@ -1,8 +1,9 @@
 <template>
     <div class="container-cursos">
-        <h1>Cursos Disponíveis</h1>
+        <h1 v-if="slugCategoria">Cursos da categoria : {{slugCategoria}}</h1>
+        <h1 v-else>Cursos Disponíveis</h1>
         <p>Explore nossa seleção de cursos e comece a aprender hoje mesmo</p>
-        <div class="card-curso" v-for="(curso,index) in getCursos" :key="index">
+        <div class="card-curso" v-for="(curso,index) in cursosFiltrados" :key="index">
             <img src="" alt="Imagem do Curso">
             <div class="sub-title-card">
                 <h2>{{ curso.infoBasica.nomeCurso }}</h2>
@@ -47,6 +48,15 @@ export default {
         },
         getAlunoEmail(){
             return this.$store.getters.getUserData.email
+        },
+        slugCategoria(){
+            return this.$route.params.slug
+        },
+        cursosFiltrados(){
+            if(!this.slugCategoria){
+                return this.getCursos
+            }
+            return this.getCursos.filter(curso =>curso.slugCategoria ===this.slugCategoria)
         }
     },
     methods: {
@@ -88,7 +98,11 @@ export default {
             const curso = this.getCursos.find(c => c.infoBasica.nomeCurso === nomeCurso);
             if (!curso) return;
 
+            
+
             const slug = curso.slug;
+
+            this.$store.dispatch('saveSlugAberta', slug)
             this.$router.push(`/curso/${slug}`);
         }
     }

@@ -7,13 +7,13 @@
         </div>
         <div v-for="(aula,index) in getAulas" :key="index" class="input-group">
             <div class="input-aula-only">
-                <input type="checkbox" :id="index" :value="aula" :checked="aulaSelecionada(aula)" @change="handleInput($event,aula)" />
+                <input type="checkbox" :id="index" :value="aula" @change="handleInput(aula)" />
                 <div class="aula-conteudo">
-                    <label :for="index">{{ aula.assunto }}</label>
-                    <p>Duração: {{ aula.duracao }} min</p>
+                    <label :for="index">{{ aula.assuntoAula }}</label>
+                    <p>Duração: {{ aula.duracaoAula }} min</p>
                 </div>
             </div>
-            <img src="" alt="Icone">
+            
         </div>
     </div>
 </template>
@@ -26,8 +26,7 @@ export default{
     },
     data(){
         return{
-            localAulasSelecionadas: this.aulasSelecionadas || []
-           
+            aulasChecadas:[]
         }
     },
     methods:{
@@ -39,31 +38,19 @@ export default{
                 aulas:this.aulasSelecionadas
             }
         },
-        handleInput(event, aula){
-            if( event.target.checked){
-                this.$emit('add:aula',aula)
-            }
-            else{
-                this.$emit('add:remove', aula)
-            }
+        handleInput(aula){
+            this.aulasChecadas.push(aula)
+            this.$emit("update:aulasSelecionadas", this.aulasChecadas)
+            
         },
-        aulaSelecionada(aula) {
-            return this.aulasSelecionadas.some(a => a.assunto === aula.assunto);
-        }
+ 
     },
     computed:{
         getAulas(){
             return this.$store.getters.getAulas
         }
     },  
-    watch: {
-        localAulasSelecionadas: {
-            handler(novoValor) {
-            this.$emit('update:aulasSelecionadas', novoValor)
-    },
-        deep: true
-  }
-}
+  
 }
 </script>
 <style>
