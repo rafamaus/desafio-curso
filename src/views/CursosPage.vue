@@ -5,9 +5,9 @@
         <p>Explore nossa seleção de cursos e comece a aprender hoje mesmo</p>
         <div class="div-cards">
         <div class="card-curso" v-for="(curso,index) in cursosFiltrados" :key="index">
-            <img :src="curso.infoBasica.imagemCurso" alt="Imagem do Curso" style="width: 50%;">
+            <img :src="curso.infoBasica.imagemCurso" alt="Imagem do Curso" style="width: 50%; height: 30%;">
             <div class="sub-title-card">
-                <h2 class="h2-title">{{ curso.infoBasica.nomeCurso }}</h2>
+                <h2 class="h2-title">{{ truncarTexto(curso.infoBasica.nomeCurso) }}</h2>
                 <p >{{ curso.infoBasica.categoriaCurso }}</p>
             </div>
             <div class="sub-title-card">
@@ -102,6 +102,10 @@ export default {
 
             this.$store.dispatch('saveSlugAberta', slug)
             this.$router.push(`/curso/${slug}`);
+        },
+        truncarTexto(texto, limite = 15) {
+            if (!texto) return '';
+            return texto.length > limite ? texto.slice(0, limite) + '...' : texto;
         }
     }
 }

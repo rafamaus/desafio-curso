@@ -4,6 +4,7 @@
             <div class="div-header-home">
                 <button @click="toggleSideBar" class="btn-sideBar"><svg fill="currentColor" class="svg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" ><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></button>
                 <button @click="vaiParaHome" class="btn-logo"><img src="@/assets/generic.png" alt="Logo site de Cursos Implydemy" class="logo"></button>
+               
 
                 <div v-if="isAluno" class="search-area">
                     <input v-model="cursoPesquisado" type="text" placeholder="Pesquisar cursos" class="btn-pesquisar">
@@ -11,6 +12,7 @@
                 </div>
 
                 <button v-if="isProfessor" @click="criarCurso" class="btn-criar-curso">Criar curso  ➕</button>
+                 <button @click="criarAula" class="btn-criar-curso">Criar Aulas</button>
 
                 <nav class="navClass">
                     <button @click="direcionaPerfil" class="btn-navClass">Perfil</button>
@@ -51,6 +53,9 @@ export default {
     methods: {
         vaiParaHome(){
             this.$router.push('/home')
+        },
+        criarAula(){
+            this.$router.push('/nova-aula')
         },
         direcionaPerfil() {
             this.$router.push('/perfilPage')
@@ -103,6 +108,7 @@ export default {
     border: 2px solid  rgb(115, 0, 0);
     border-radius: 2px;
     box-shadow: 0 4px 6px rgba(255, 1, 1, 0.778);
+    height: auto;
 }
 .div-header-home{
     padding-top: 20px;
@@ -110,7 +116,30 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 4vh;
+ 
+    
+    
+}
+@media(max-width:390px) {
+.div-header-home {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+    .btn-criar-curso,
+    .search-area,
+    .navClass {
+    width: 100%;
+    }
+    .btn-pesquisar {
+    width: 100%;
+    margin: 4px 0;
+    }
+      .navClass {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+    
     
 }
 .logo{

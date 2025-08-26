@@ -14,10 +14,10 @@
             </div>
             <div class="container-resumo">
                 <h3 class="h2-title">Resumo do curso:</h3>
-                <p>Nome: {{nomeCurso}}</p>
+                <p>Nome: {{truncarTexto(nomeCurso, 25)}}</p>
                 <p>Categoria: {{categoriaCurso}}</p>
                 <p>Número de aulas: {{numeroAulas}}</p>
-                <p>Período: {{ localDataInicio }} até {{ localDataTermino }} </p>
+                
             </div>
             </div>
 </template>
@@ -52,6 +52,10 @@ export default{
         updateDataTermino(event){
             this.$emit('update:dataTermino',event.target.value)
         },
+        truncarTexto(texto, limite) {
+            if (!texto) return '';
+            return texto.length > limite ? texto.slice(0, limite) + '...' : texto;
+        }
       
     },
     watch: {

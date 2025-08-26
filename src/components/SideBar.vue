@@ -15,7 +15,7 @@
             <div class="isProfessor">
                 <p class="paragraph-red">Número de cursos possuídos: {{ getCursos.length }}</p>
                 <ul>
-                    <li class="btn-categorias2" v-for="(curso, index) in getCursos" :key="index">{{ curso.infoBasica.nomeCurso }} - Número de
+                    <li class="btn-categorias2" v-for="(curso, index) in getCursos" :key="index">{{ truncarTexto(curso.infoBasica.nomeCurso,15) }} - Número de
                         inscritos: {{ curso.alunosInscritos.length }}</li>
                 </ul>
             </div>
@@ -87,6 +87,10 @@ export default {
 
             this.$store.dispatch('saveSlugAberta', slug)
             this.$router.push(`/cursosPage/${slug}`);
+        },
+        truncarTexto(texto, limite) {
+            if (!texto) return '';
+            return texto.length > limite ? texto.slice(0, limite) + '...' : texto;
         }
 
     },
