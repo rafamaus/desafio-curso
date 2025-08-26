@@ -2,7 +2,7 @@
     <div class="input-group">
         <label :for="id" class="label-only">{{ label }}</label>
         <input class="input-only" :id="id" :type="type" :placeholder="placeholder" :value="value"
-            @input="handleInput" @invalid="handleInvalid" required :pattern="pattern">
+            @input="handleInput" @invalid="handleInvalid" :required="required" :pattern="pattern">
     </div>
 </template>
 <script>
@@ -15,6 +15,7 @@ export default {
         placeholder: String,
         value: String,
         pattern: String,
+        required:Boolean
     },
     methods: {
         handleInput(event){

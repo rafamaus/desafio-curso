@@ -1,5 +1,5 @@
 <template>
-    <div class="nova-aula">
+    <div class="container-home-global">
         <h1>Criar Nova Aula</h1>
         <p>Preencha as informações da sua aula em 2 etapas simples</p>
         <div v-if="etapa===0" class="etapa-zero-container">
@@ -15,7 +15,7 @@
             />
             <div class="div-antes-depois">
                 <button class="btn-antes-depois" @click="voltaEtapa" style="background-color: gray;">Voltar</button>
-                <button class="btn-antes-depois" @click="proximaEtapa" style="background-color: red;">Prosseguir</button>
+                <button class="btn-antes-depois" @click="proximaEtapa1" style="background-color: red;">Prosseguir</button>
             </div>
             
         </div>
@@ -60,10 +60,22 @@ export default{
         voltaEtapa(){
             this.etapa = this.etapa-1
         },
-        proximaEtapa(){
-            this.etapa = this.etapa+1
+        proximaEtapa1(){
+            if(this.assuntoAula && this.descricaoAula && this.duracaoAula){
+                const verificarDuracao = /^\d+$/.test(this.duracaoAula)
+                if(verificarDuracao){
+                this.etapa = this.etapa+1
+                }
+            }
+            else{
+                alert("Preencha todos os campos!!")
+            }
         },
         criarAula(){
+            if(!this.videoAula){
+                alert("É necessário carregar um vídeo!!")
+                return
+            }
             const aulaCompleta={
                 assuntoAula:this.assuntoAula,
                 descricaoAula:this.descricaoAula,

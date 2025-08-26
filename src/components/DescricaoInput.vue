@@ -1,7 +1,7 @@
 <template>
     <div class="input-group">
         <label :for="id">{{ label }}</label>
-        <textarea @input="handleInput" :value="value" name="" :id="id" rows="12" class="textarea-only" placeholder="Descreva seu curso..."></textarea>
+        <textarea :required="required" @input="handleInput" :value="value" name="" :id="id" rows="12" class="textarea-only" placeholder="Descreva seu curso..."></textarea>
     </div>
 </template>
 <script>
@@ -10,7 +10,8 @@ export default{
     props:{
         id: String,
         label: String,
-        value:String
+        value:String,
+        required:Boolean
     },
     methods:{
         handleInput(event){

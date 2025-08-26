@@ -2,6 +2,7 @@
     <div class="container-info-basica">
     <h2>Etapa 1: Informações Básicas</h2>
     <p>Defina as informações básicas do seu curso</p>
+    
     <BaseInput :value="nomeCurso" @input="updateNomeCurso" id="nomeCurso" label="Nome Curso" type="text" placeholder="Ex: Desenvolvimento Web Completo"  aria-disabled="false"/>
     <SelectInput :value="categoriaCurso" @input="updateCategoriaCurso" id="categoriaCurso" label="Categoria"/>
     <ImagemInput  :value="imagemCurso" @input="updateImagemCurso" id="imagemCurso" label="Imagem Curso"/>
@@ -70,5 +71,10 @@ export default{
   border-style: solid;
   padding: 20px;
   box-sizing: border-box;
+  border-color: rgb(246, 146, 224);
+    border-radius: 4px;
+    background-color:rgba(220, 122, 171, 0.484) ;
+    border-color: violet;
+    box-shadow: inset 0 0 10px violet;
 }
 </style>

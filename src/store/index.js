@@ -11,7 +11,7 @@ export default new Vuex.Store({
         password:'',
         userRole:'',
         cursoPesquisado: '',
-        categorias: ['futebol','marketing','design','fotografia','idiomas','arte'],
+        categorias: ['Culinária','Marketing','Design','Fotografia','Idiomas','Arte'],
         aulas:[{
             assuntoAula: "Introdução ao Vue",
             descricaoAula: "Vue é um framework progressivo...",

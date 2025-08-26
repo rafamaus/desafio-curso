@@ -17,7 +17,7 @@ const router = new Router({
     mode: 'history',
     routes: [
         {path: '/', component: LoginView},
-        {path: '/homeAluno', component: HomeConditional},
+        {path: '/home', component: HomeConditional},
         {path: '/perfilPage', component: PerfilPage},
         {path: '/cursosPage', component: CursosPage},
         {path: '/cadastro-curso', component: CadastroCurso},
@@ -30,10 +30,10 @@ router.beforeEach((to, from, next) => {
     const userAthenticated = !!store.state.email && !!store.state.password && !!store.state.userRole
     const rotasProibidasAluno =['/cadastro-curso', '/nova-aula']
 
-    if (to.path !== '/' && !userAthenticated) {
+    if ((to.path !== '/' && !userAthenticated)) {
         next('/')
     } else if(store.state.userRole==='aluno' && rotasProibidasAluno.includes(to.path)) {
-        next('/homeAluno')
+        next('/home')
     }
     else{
         next()

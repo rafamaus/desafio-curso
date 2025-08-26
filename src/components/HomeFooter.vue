@@ -27,6 +27,7 @@ export default{
     width: 100%;
     left: 0;
     bottom: 0;
+    color:rgb(255, 242, 250) ;
 }
 .div-footer-home{
     display: flex;

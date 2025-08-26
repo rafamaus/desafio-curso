@@ -50,14 +50,15 @@ export default {
                 return
             }
             alert('Login concluído com sucesso!!')
-            this.$router.push('/homeAluno')
-            
             this.$store.dispatch('saveLoginData',{
                 email: this.email,
                 password: this.password,
                 userRole: this.userRole
             })
             
+            this.$router.push('/home')
+            
+
         }
     }
 }
@@ -83,8 +84,9 @@ export default {
 .login-card {
     border-radius: 4px;
     margin: auto;
-    margin-top: 15vh;
-    width: 30%;
+    margin-top: 6vh;
+    margin-bottom: 10vh;
+    width: 40%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -95,6 +97,12 @@ export default {
     border-color: rgb(168, 8, 8);
     border-width: 2px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  
+}
+@media(max-width:495px){
+    .login-card{
+        width: 60%;
+    }
 }
 
 .login-title {
@@ -133,10 +141,10 @@ export default {
     padding: 8px;
     padding-left: 32px;
     padding-right: 32px;
-    background-color:rgb(151, 4, 78) ;
     border-style: groove;
     border-radius: 4px;
     cursor: pointer;
+    background-color:rgb(151, 4, 78) ;
     transition: transform 0.3s;
     border-color: violet;
     box-shadow: inset 0 0 10px violet;

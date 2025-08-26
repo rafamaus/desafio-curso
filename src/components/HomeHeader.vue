@@ -2,19 +2,19 @@
     <div class="headerAndSideBar">
         <header class="header-home">
             <div class="div-header-home">
-                <button @click="toggleSideBar" class="btn-sideBar">|||</button>
-                <img src="@/assets/generic.png" alt="Logo site de Cursos Implydemy">
+                <button @click="toggleSideBar" class="btn-sideBar"><svg fill="currentColor" class="svg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" ><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></button>
+                <button @click="vaiParaHome" class="btn-logo"><img src="@/assets/generic.png" alt="Logo site de Cursos Implydemy" class="logo"></button>
 
                 <div v-if="isAluno" class="search-area">
-                    <input v-model="cursoPesquisado" type="text" placeholder="Pesquisar cursos" class="input-pesquisa">
-                    <button @click="pesquisarCurso">🔍</button>
+                    <input v-model="cursoPesquisado" type="text" placeholder="Pesquisar cursos" class="btn-pesquisar">
+                    <button @click="pesquisarCurso" class="btn-pesquisar">🔍</button>
                 </div>
 
-                <button v-if="isProfessor" @click="criarCurso">Criar curso</button>
+                <button v-if="isProfessor" @click="criarCurso" class="btn-criar-curso">Criar curso  ➕</button>
 
                 <nav class="navClass">
-                    <button @click="direcionaPerfil">Perfil</button>
-                    <button @click="direcionaCursos">Cursos</button>
+                    <button @click="direcionaPerfil" class="btn-navClass">Perfil</button>
+                    <button @click="direcionaCursos" class="btn-navClass">Cursos</button>
                 </nav>
             </div>
         </header>
@@ -49,6 +49,9 @@ export default {
 
     },
     methods: {
+        vaiParaHome(){
+            this.$router.push('/home')
+        },
         direcionaPerfil() {
             this.$router.push('/perfilPage')
         },
@@ -77,8 +80,16 @@ export default {
 
 </script>
 <style>
+
 .headerAndSideBar{
     margin-bottom: 40px;
+    
+    
+}
+.btn-logo{
+    background-color:rgb(168, 8, 8) ;
+    border-style: none;
+    cursor: pointer;
 }
 .header-home{
     position: fixed;
@@ -89,7 +100,9 @@ export default {
     left: 0;
     background-color: rgb(168, 8, 8);
     z-index: 999;
-
+    border: 2px solid  rgb(115, 0, 0);
+    border-radius: 2px;
+    box-shadow: 0 4px 6px rgba(255, 1, 1, 0.778);
 }
 .div-header-home{
     padding-top: 20px;
@@ -97,7 +110,71 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 4vh;
     
+}
+.logo{
+    border-style: groove;
+    border-color: rgb(197, 7, 102);
+    padding: 6px;
+    border-radius: 50%;
+    background-color: rgb(196, 6, 101);
+    box-shadow: 2px 2px 4px black;
+}
+.btn-criar-curso{
+    height: 120%;
+    width: 15%;
+    border-radius: 4px;
+    border-style: initial;
+    background-color:rgb(197, 4, 101) ;
+    transition: transform 0.3s;
+    border-color: rgb(251, 174, 251);
+    box-shadow: inset 0 0 10px rgb(243, 182, 243);
+    cursor: pointer;
+    color:rgb(251, 251, 251) ;
+    font-weight:bold;
+}
+.btn-criar-curso:hover{
+    transform: scale(1.1);
+    background-color:rgb(223, 20, 20) ;
+}
+.navClass{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
     
+}
+.btn-navClass{
+    margin-right: 10px;
+    border-radius: 4px;
+    border-style: initial;
+    background-color:rgb(151, 4, 78) ;
+    transition: transform 0.3s;
+    border-color: violet;
+    box-shadow: inset 0 0 10px violet;
+    cursor: pointer;    
+    color:rgb(251, 251, 251) ;
+    padding: 4px;
+}
+.btn-pesquisar{
+    margin-right: 10px;
+    border-radius: 4px;
+    border-style: solid;
+    background-color:rgb(106, 34, 34) ;
+    transition: transform 0.3s;
+    border-color: rgb(242, 0, 0);
+    box-shadow: inset 0 0 10px rgb(252, 234, 252);
+    cursor: pointer;    
+    color:rgb(251, 251, 251) ;
+    padding: 4px;
+}
+.btn-sideBar{
+    background-color: rgb(168, 8, 8);
+    border-style: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.svg{
+    color: violet;
 }
 </style>

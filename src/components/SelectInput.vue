@@ -2,7 +2,7 @@
     <div class="input-group">
         <label :for="id" v-if="isProfessor"  class="label-only">{{ label }}</label>
             
-            <select name="categoriaCurso" :id="id" class="input-only" @change="handleInput">
+            <select name="categoriaCurso" :id="id" class="input-only" @change="handleInput" :required="required">
                 <option disabled selected hidden value=""></option>
                 <option v-for="(categoria,index) in getCategorias" :key="index" :value="categoria" >{{ categoria }}</option>
                 
@@ -25,7 +25,8 @@ export default{
     props:{
         id: String,
         label: String,
-        value:String
+        value:String,
+        required:Boolean
 
     },
     computed: {

@@ -3,7 +3,7 @@
         <h2>Etapa 2: Vínculo com aulas</h2>
         <div class="sub-title">
             <p>Selecione as aulas que farão parte do curso</p>
-            <button @click="criarAula">Criar Aulas 📽️</button>
+            <button @click="criarAula" class="btn-criar-curso">Criar Aulas 📽️</button>
         </div>
         <div v-for="(aula,index) in getAulas" :key="index" class="input-group">
             <div class="input-aula-only">

@@ -1,21 +1,22 @@
 <template>
     <div>
         <div class="exibe-aulas">
-            <h2>Aulas do Curso</h2>
-            <p>Clique em uma aula para visualizar o conteúdo</p>
+            <h2 class="h1-title">Aulas do Curso</h2>
+            <p class="paragraph-red">Clique em uma aula para visualizar o conteúdo</p>
             <div class="div-sub-container" v-if="curso">
                 <div class="div-for-aulas">
-                    <div class="input-group">
+                    <div class="input-group-aula">
                         <button class="input-aula" v-for="(aula,i) in curso.aulas.aulasSelecionadas" :key="i" @click="videoAulaTela(aula.assuntoAula)">
                             <h4>*{{aula.assuntoAula}}</h4>
                             <p>{{aula.duracaoAula}} minutos</p>
+                            <p v-if="aula.concluida==='Sim'"> Concluida </p>
                         </button>
                     </div>
                 </div>
                 <div class="div-for-video">
                     <h4>{{ tituloAula }}</h4>
-                    <iframe width="100%" height="315" :src="videoNaTela" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <button @click="concluirAula">Marcar como concluída</button>
+                    <iframe class="i-frame" width="90%" height="315" :src="videoNaTela" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <button @click="concluirAula" class="btn-acoes" >Marcar como concluída</button>
                 </div>
             </div>
         </div>
@@ -34,7 +35,8 @@
         data(){
             return{
                 tituloAula: '',
-                videoNaTela:''
+                videoNaTela:'',
+                isConcluida:false
             }
         },
         computed:{
@@ -75,6 +77,7 @@
                     assuntoAula: this.tituloAula
                 })
                 alert('aula concluída')
+                this.isConcluida=true
             }
 
     },
@@ -104,6 +107,19 @@
     align-items: center;
     gap:20px;
 }
+.input-grop-aula{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+}
+@media(max-width:877){
+    .input-aula{
+        height: 120px;
+    }
+}
 .div-sub-container{
     display: flex;
     justify-content: space-between;
@@ -112,9 +128,22 @@
 .div-for-aulas{
     border-style: solid;
     width: 40%;
+    background-color: rgba(255, 0, 0, 0.214);
+     border-color: rgb(216, 72, 72);
+    box-shadow: inset 0 0 10px rgb(238, 130, 130);
+    border-radius: 16px;
 }
 .div-for-video{
     width: 50%;
     border-style: solid;
+     border-color: violet;
+    box-shadow: inset 0 0 10px violet;
+    background-color: rgb(255, 226, 255);
+}
+.i-frame{
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 8px;
+    border-color: violet;
 }
 </style>

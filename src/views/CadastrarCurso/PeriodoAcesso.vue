@@ -5,19 +5,19 @@
             <div class="inputs-periodo">
                 <div class="date-input">
                     <label for="data-inicio">Data de início:</label>
-                    <input type="date" id="data-inicio" v-model="localDataInicio" @input="updateDataInicio">
+                    <input type="date" id="data-inicio" v-model="localDataInicio" @input="updateDataInicio" class="btn-acoes">
                 </div>
                 <div class="date-input">
                     <label for="data-termino">Data de término:</label>
-                    <input type="date" id="data-termino" v-model="localDataTermino" @input="updateDataTermino">
+                    <input type="date" id="data-termino" v-model="localDataTermino" @input="updateDataTermino" class="btn-acoes">
                 </div>
             </div>
             <div class="container-resumo">
-                <h3>Resumo do curso:</h3>
-                <p>Nome: ...</p>
-                <p>Categoria: ...</p>
-                <p>Número de aulas: ...</p>
-                <p>Período: ...</p>
+                <h3 class="h2-title">Resumo do curso:</h3>
+                <p>Nome: {{nomeCurso}}</p>
+                <p>Categoria: {{categoriaCurso}}</p>
+                <p>Número de aulas: {{numeroAulas}}</p>
+                <p>Período: {{ localDataInicio }} até {{ localDataTermino }} </p>
             </div>
             </div>
 </template>
@@ -25,8 +25,11 @@
 export default{
     name:'PeriodoAcesso',
     props:{
-        dataInicio:String,
-        dataTermino:String
+        dataInicio: String,
+        dataTermino: String,
+        nomeCurso: String,
+        categoriaCurso: String,
+        numeroAulas: Number
 
     },
     data(){
@@ -78,6 +81,9 @@ export default{
   box-sizing: border-box;
   margin: auto;
   margin-top: 20px;
+  border-color: violet;
+    box-shadow: inset 0 0 10px violet;
+    background-color: rgba(90, 6, 90, 0.607);
 }
 
 

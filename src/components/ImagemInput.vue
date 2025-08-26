@@ -1,7 +1,7 @@
 <template>
     <div class="input-group">
         <label :for="id">{{ label }}</label>
-        <input type="file" class="input-only" :id="id"  @change="handleInput">
+        <input type="file" class="input-only" :id="id"  @change="handleInput" :required="required">
 
     </div>
 
@@ -13,7 +13,9 @@ export default{
     props:{
         id: String,
         label: String,
-        value:String
+        value:String,
+        required:Boolean
+
     },
     methods:{
         handleInput(event){
